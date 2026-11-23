@@ -19,6 +19,7 @@
   <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 20.5c1.2-3.6 4.2-5.5 8-5.5s6.800 1.900 8 5.500" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
   <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.500-4.500M12 15l4.500-4.500M5 19.500h14" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.500" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 10.500V7.500a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="15.500" r="1.500" fill="currentColor"/></symbol>
   <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round"/></symbol>
 </svg>
 
@@ -31,15 +32,37 @@
     </h1>
     <div class="titlebar__side">
       <span id="appVersion" class="titlebar__version"></span>
+      <button id="btnManage" class="titlebar__auth" type="button" hidden>
+        <svg class="icon" aria-hidden="true"><use href="#i-pencil"/></svg>
+        Quản lý
+      </button>
+      <button id="btnAccess" class="titlebar__auth" type="button" hidden>
+        <svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg>
+        Quyền truy cập
+      </button>
       <button id="btnAuth" class="titlebar__auth" type="button" hidden>
         <svg class="icon" aria-hidden="true"><use href="#i-user"/></svg>
-        <span id="btnAuthLabel">Đăng nhập</span>
+        Đăng xuất
       </button>
     </div>
   </header>
 
   <div id="notice" class="notice" hidden></div>
 
+  <!-- Cổng đăng nhập: hiện khi người xem chưa đăng nhập hoặc chưa được cấp quyền -->
+  <section id="gate" class="gate" aria-live="polite" hidden>
+    <svg class="gate__icon" aria-hidden="true"><use href="#i-lock"/></svg>
+    <h2 id="gateTitle" class="gate__title"></h2>
+    <p id="gateMsg" class="gate__msg"></p>
+    <div class="gate__actions">
+      <div id="gateButton" class="gate__button" hidden></div>
+      <button id="gateRetry" class="btn" type="button" hidden>Thử lại</button>
+      <button id="gateAdmin" class="gate__admin" type="button" hidden>Tôi là người quản lý trang</button>
+      <a class="gate__admin" href="privacy.html">Chính sách quyền riêng tư</a>
+    </div>
+  </section>
+
+  <div id="content" class="content">
   <section class="topic" aria-label="Thông tin đề tài">
     <button id="btnEditInfo" class="pill" type="button" hidden>
       <svg class="icon" aria-hidden="true"><use href="#i-pencil"/></svg>
@@ -109,6 +132,7 @@
     </div>
 
   </main>
+  </div>
 </div>
 
 <input id="filePicker" type="file" multiple hidden>
@@ -211,6 +235,26 @@
   </div>
 </dialog>
 
+<!-- Hộp thoại: quyền truy cập -->
+<dialog id="dlgAccess" class="dlg dlg--wide">
+  <div class="dlg__body">
+    <h2 class="dlg__title">Quyền truy cập</h2>
+    <p class="dlg__sub">Trang này riêng tư. Chỉ những tài khoản Google dưới đây mới xem được trang và các tệp; họ chỉ được xem, không tải về.</p>
+    <ul id="accessList" class="access"></ul>
+    <form id="formAccess" class="access__add">
+      <label class="field">
+        <span>Cấp quyền xem cho địa chỉ Gmail</span>
+        <input id="inAccessEmail" type="email" placeholder="ten@gmail.com" autocomplete="off" required>
+      </label>
+      <button class="btn btn--primary" type="submit">Cấp quyền</button>
+    </form>
+    <p class="dlg__sub dlg__note">Sau khi cấp quyền, hãy gửi địa chỉ trang web cho người đó. Họ mở trang và bấm "Đăng nhập bằng Google" bằng đúng địa chỉ này.</p>
+    <div class="dlg__actions">
+      <button class="btn" type="button" data-close>Đóng</button>
+    </div>
+  </div>
+</dialog>
+
 <!-- Hộp thoại: xem trước -->
 <dialog id="dlgView" class="dlg dlg--viewer">
   <div class="viewer">
@@ -228,6 +272,7 @@
         <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
       </button>
     </div>
+    <p id="viewHint" class="viewer__hint" hidden></p>
     <div id="viewBody" class="viewer__body"></div>
   </div>
 </dialog>
