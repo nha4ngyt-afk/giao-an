@@ -7,10 +7,10 @@
  */
 window.APP_CONFIG = {
   // Mã OAuth Client ID (dạng 1234567890-abcxyz.apps.googleusercontent.com)
-  GOOGLE_CLIENT_ID: "",
+  GOOGLE_CLIENT_ID: "781363596999-jqneusfrosk1ri5gqjf7rhva35d2udva.apps.googleusercontent.com",
 
   // API key (dạng AIzaSy...) — dùng để người xem đọc danh sách tệp mà không cần đăng nhập
-  GOOGLE_API_KEY: "",
+  GOOGLE_API_KEY: "AIzaSyAQmL2ghSZol-JLlYqGvluZrZxib8m7lKU",
 
   // Mã thư mục Google Drive chứa dữ liệu.
   // Để trống ở lần đầu; sau khi bạn đăng nhập lần đầu, trang web sẽ hiện mã để bạn dán vào đây.
