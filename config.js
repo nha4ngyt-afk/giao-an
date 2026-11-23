@@ -14,7 +14,7 @@ window.APP_CONFIG = {
 
   // Mã thư mục Google Drive chứa dữ liệu.
   // Để trống ở lần đầu; sau khi bạn đăng nhập lần đầu, trang web sẽ hiện mã để bạn dán vào đây.
-  DRIVE_FOLDER_ID: "",
+  DRIVE_FOLDER_ID: "1f1sN-2zhXAuwtSxg57ABw5U2-LKrxo9H",
 
   // Tên thư mục sẽ được tạo trong Google Drive của bạn
   DRIVE_FOLDER_NAME: "Quản lý giáo án - Dữ liệu web",
